@@ -1,2 +1,3 @@
 # hb-eager-vs-lazy-demo
 Java spring demo using hibernate
+project will show differences between eager and lazy loading...
