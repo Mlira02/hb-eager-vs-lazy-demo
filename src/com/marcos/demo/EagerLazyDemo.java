@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DeleteCourseDemo
+public class EagerLazyDemo
 {
     public static void main(String[] args)
     {
@@ -23,10 +23,12 @@ public class DeleteCourseDemo
         try
         {
             session.beginTransaction();
-            int theId = 10;
-            Course tempCourse = session.get(Course.class, theId);
-            System.out.println("TempCourse here: " + tempCourse.getTitle());
-            session.delete(tempCourse);
+
+            int theID = 1;
+            Instructor tempInstructor = session.get(Instructor.class, theID);
+            System.out.println("Current instructor is " + tempInstructor);
+            System.out.println("All courses here: " + tempInstructor.getCourses());
+
 
             session.getTransaction().commit();
         }
