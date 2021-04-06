@@ -27,14 +27,20 @@ public class FetchJoinDemo
 
             int theID = 3;
 
-            Query<Instructor> query = session.createQuery("select i from Instructor i " + "JOIN FETCH i.courses", Instructor.class);
+            Query<Instructor> query = session.createQuery("select i from Instructor i " + "JOIN FETCH i.courses " + "where i.id=:theInstructorId", Instructor.class);
+            query.setParameter("theInstructorId", theID);
+            Instructor tempInstructor = query.getSingleResult();
+            System.out.println("TempInstructor here: " + tempInstructor);
 
             session.getTransaction().commit();
+            factory.close();
+//            Saving query data in a local variable can stop the lazy data exception to be thrown...
+            System.out.println("All courses for Susan here: " + tempInstructor.getCourses());
         }
         finally
         {
             System.out.println("All tasks completed...");
-            factory.close();
+            //            factory.close();
         }
     }
 }
